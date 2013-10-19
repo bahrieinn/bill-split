@@ -4,7 +4,7 @@ post '/users' do
   
   if @user.save
     session[:user_id] = @user.id
-    redirect "/user/#{@user.id}/profile"
+    redirect "/users/#{@user.id}"
   else
     redirect "/"
   end
@@ -17,7 +17,7 @@ get '/login' do
 
   if User.authenticate(params[:email], params[:password])
     session[:user_id] = @user.id
-    redirect "/user/#{@user.id}/profile"
+    redirect "/users/#{@user.id}"
   else
     redirect "/"
   end
