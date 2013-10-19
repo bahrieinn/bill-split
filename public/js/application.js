@@ -1,7 +1,32 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+
+/***************** BACKBONE ROUTERS *********************/
+
+  var Router = Backbone.Router.extend({
+    routes: {
+      '':'home'
+    }  
+  });
+
+
+
+/***************** BACKBONE MODELS **********************/
+
+
+/***************** BACKBONE COLLECTIONS *****************/
+
+
+/***************** BACKBONE VIEWS ***********************/
+
+
+/////////// INITIALIZE OBJECTS HERE  //////////////
+
+  var mainRouter = new Router();
+
+  mainRouter.on('route:home', function(){
+    console.log("Landed on home page");
+  });
+
+  Backbone.history.start();
 });
