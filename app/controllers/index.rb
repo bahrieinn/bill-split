@@ -1,6 +1,6 @@
 get '/' do
   if current_user
-    erb :profile
+    redirect "/users/#{session[:user_id]}"
   else
     erb :index
   end

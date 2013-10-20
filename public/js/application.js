@@ -16,6 +16,10 @@ $(document).ready(function() {
 
 /***************** BACKBONE COLLECTIONS *****************/
 
+var Expenses = Backbone.Collection.extend({
+  // Fetch call will look to get '/expenses' action in Sinatra
+  url: '/expenses'
+});
 
 /***************** BACKBONE VIEWS ***********************/
 
