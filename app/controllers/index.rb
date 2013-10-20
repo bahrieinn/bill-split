@@ -1,4 +1,7 @@
 get '/' do
-  # Look in app/views/index.erb
-  erb :index
+  if current_user
+    erb :profile
+  else
+    erb :index
+  end
 end
