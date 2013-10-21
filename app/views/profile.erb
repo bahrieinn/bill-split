@@ -15,5 +15,15 @@
         <th></th>
       </tr> 
     </thead>
+    <tbody>
+        {{ _.each(expenses, function(expense){ }}
+          <tr>
+            {{ var expense = expense.get('expense') }}
+              <td>{{= expense.name }}</td>
+              <td>{{= expense.category }}</td>
+              <td>{{= expense.total }}</td>
+          </tr>
+        {{ }); }}
+    </tbody>
   </table>
 </script>

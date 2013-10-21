@@ -23,14 +23,36 @@ var Expenses = Backbone.Collection.extend({
 
 /***************** BACKBONE VIEWS ***********************/
 
+//Change templating from ERB style <% %> to mustache style {{ }}
+_.templateSettings = {
+  interpolate: /\{\{\=(.+?)\}\}/g,
+  evaluate: /\{\{(.+?)\}\}/g
+};
+
+var ExpenseList = Backbone.View.extend({
+  el: '.page',
+
+  render: function(){
+    var that = this;
+    var expenses = new Expenses();
+    expenses.fetch({
+      success: function(expenses){
+        var template = _.template($('#bills-table').html(), {expenses: expenses.models})
+        that.$el.html(template);
+      }
+    });
+  }
+});
 
 /////////// INITIALIZE OBJECTS HERE  //////////////
+  var expenseList = new ExpenseList();
 
   var mainRouter = new Router();
 
   mainRouter.on('route:home', function(){
-    console.log("Landed on home page");
+    expenseList.render();
   });
+
 
   Backbone.history.start();
 });
