@@ -13,16 +13,19 @@ post '/expenses' do
 
     user = User.find(session[:user_id])
     expense_attributes = JSON.parse(request.body.read)
+    debtor_ids = expense_attributes['debtors']
 
     # If debtors is type String, then there is only one debtor
-    if expense_attributes['debtors'].instance_of?(String)
-      expense_attributes['debtors'] = [ User.find(expense_attributes['debtors'].to_i) ] 
+    if debtor_ids.instance_of?(String)
+      # Replace ID with actual User object
+      expense_attributes['debtors'] = [ User.find(debtor_ids.to_i) ] 
     else
-      debtor_ids = expense_attributes['debtors']
-      debtors = debtor_ids.map { |debtor_id| User.find(debtor_id.to_i) }
+      debtor_users = debtor_ids.map { |debtor_id| User.find(debtor_id.to_i) }
       expense_attributes['debtors'] = debtors
     end
+
     expense = user.credited_expenses.new(expense_attributes)
+    
     if expense.save!
       expense_attributes.to_json
     else
