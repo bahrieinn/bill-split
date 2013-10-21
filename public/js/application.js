@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  
+
   // Snippet taken from StackOverflow to serialize form data into JSON objects
   $.fn.serializeObject = function() {
     var o = {};
@@ -90,7 +90,13 @@ var EditExpense = Backbone.View.extend({
 
   saveExpense: function(event){
     var expenseDetails = $(event.currentTarget).serializeObject();
-    console.log("Save expense clicked");
+    console.log(expenseDetails);
+    var expense = new Expense();
+    expense.save(expenseDetails, {
+      success: function(expense){
+        mainRouter.navigate('', {trigger: true});
+      }
+    });
     return false;
   },
 

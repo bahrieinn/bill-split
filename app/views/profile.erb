@@ -41,12 +41,12 @@
       <label for="category">Category</label>
       <input type="text" id="category" name="category"><br>
 
-      <label for="amount">Amount</label>
-      <input type="text" id="amount" name="amount"><br>
-      <label for="debtor">Who Owes?</label><br>
+      <label for="total">Amount</label>
+      <input type="text" id="total" name="total"><br>
+      <label for="debtors">Who Owes?</label><br>
       {{  _.each(members, function(member){ }}
         {{ var member = member.get('user') }}
-        <input type="checkbox" name="debtor" value="{{= member.id }}"> {{= member.first_name.trim() }} <br>
+        <input type="checkbox" name="debtors" value="{{= member.id }}"> {{= member.first_name.trim() }} <br>
       {{  }); }}
       <button type="submit" class="btn">Save Expense</button>
     </form>
