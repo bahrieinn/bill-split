@@ -32,21 +32,24 @@
 </script>
 
 <script type="text/template" id="edit-expense-template">
+  <div class="exepnse-form-area">
+    <form class="edit-expense-form">
+      <legend>Add Expense</legend>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name"><br>
 
+      <label for="category">Category</label>
+      <input type="text" id="category" name="category"><br>
+
+      <label for="amount">Amount</label>
+      <input type="text" id="amount" name="amount"><br>
+      <label for="debtor">Who Owes?</label><br>
+      {{  _.each(members, function(member){ }}
+        {{ var member = member.get('user') }}
+        <input type="checkbox" name="debtor" value="{{= member.id }}"> {{= member.first_name.trim() }} <br>
+      {{  }); }}
+      <button type="submit" class="btn">Save Expense</button>
+    </form>
+  </div>
 </script>
 
-  <form class="edit-expense-form">
-    <legend>Add Expense</legend>
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name">
-
-    <label for="category">Category</label>
-    <input type="text" id="category" name="category">
-
-    <label for="amount">Amount</label>
-    <input type="text" id="amount" name="amount">
-    <button type="submit" class="btn">Save Expense</button>
-    <label for="debtor">Who Owes?</label>
-    {{}}
-    <input type="checkbox" name="debtor" value="">
-  </form>

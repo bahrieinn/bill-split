@@ -1,5 +1,21 @@
 $(document).ready(function() {
-
+  
+  // Snippet taken from StackOverflow to serialize form data into JSON objects
+  $.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+  };  
 
 /***************** BACKBONE ROUTERS *********************/
 
@@ -61,17 +77,19 @@ var EditExpense = Backbone.View.extend({
   },
 
   render: function(){
+    var that = this;
     var group = new Group();
     group.fetch({
       success: function(group){
-        console.log(group);
+        var template = _.template($('#edit-expense-template').html(), {expense:null, members: group.models} )
+        that.$el.prepend(template);
       }
-    })
-    var template = _.template($('#edit-expense-template').html(), {expense:null} )
-    this.$el.prepend(template);
+    });
+
   },
 
   saveExpense: function(event){
+    var expenseDetails = $(event.currentTarget).serializeObject();
     console.log("Save expense clicked");
     return false;
   },
