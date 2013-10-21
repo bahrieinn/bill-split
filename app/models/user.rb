@@ -1,4 +1,12 @@
 class User < ActiveRecord::Base
+  belongs_to :group
+
+  has_many :credited_expenses, :class_name => "Expense", :foreign_key => :creditor_id
+
+  has_many :participations
+  has_many :debited_expenses, :through => :participations, :source => :expense
+
+
   attr_reader :entered_password
   
   include BCrypt
