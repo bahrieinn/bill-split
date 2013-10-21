@@ -36,11 +36,18 @@ bryan = User.create(:first_name => "Bryan",
                                  :total => rand_price)
 end
 
-roommates = [briana, robin, bryan]
 
-roommates.each do |roommate| 
+roommates = Group.create(:name => "Roommates")
+
+people = [brian, briana, robin, bryan]
+
+people.each do |person|
+  roommates.users << person
+end
+
+people.each do |person| 
   Expense.all.each do |expense|
-    expense.debtors << roommate
+    expense.debtors << person
     expense.save!
   end
 end
