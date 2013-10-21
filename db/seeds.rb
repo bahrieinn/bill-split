@@ -14,9 +14,36 @@ brian = User.create(:first_name => "Brian",
             :email => "btong34@gmail.com",
             :password => "test")
 
+briana = User.create(:first_name => "Briana",
+            :last_name => "Estevez",
+            :email => "bestevez416@gmail.com",
+            :password => "test")
+
+robin = User.create(:first_name => "Robin",
+            :last_name => "Tong",
+            :email => "rtong@gmail.com",
+            :password => "test")
+
+bryan = User.create(:first_name => "Bryan",
+            :last_name => "Moles",
+            :email => "bmoles@gmail.com",
+            :password => "test")
+
+
 5.times do
   brian.credited_expenses.create(:category => categories.sample,
                                  :name => names.sample,
                                  :total => rand_price)
 end
+
+roommates = [briana, robin, bryan]
+
+roommates.each do |roommate| 
+  Expense.all.each do |expense|
+    expense.debtors << roommate
+    expense.save!
+  end
+end
+
+
 
