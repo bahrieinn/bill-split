@@ -20,12 +20,12 @@ post '/expenses' do
       # Replace ID with actual User object
       expense_attributes['debtors'] = [ User.find(debtor_ids.to_i) ] 
     else
-      debtor_users = debtor_ids.map { |debtor_id| User.find(debtor_id.to_i) }
+      debtors = debtor_ids.map { |debtor_id| User.find(debtor_id.to_i) }
       expense_attributes['debtors'] = debtors
     end
 
     expense = user.credited_expenses.new(expense_attributes)
-    
+
     if expense.save!
       expense_attributes.to_json
     else
