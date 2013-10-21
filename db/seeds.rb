@@ -39,7 +39,7 @@ end
 
 roommates = Group.create(:name => "Roommates")
 
-people = [brian, briana, robin, bryan]
+people = [briana, robin, bryan]
 
 people.each do |person|
   roommates.users << person

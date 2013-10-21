@@ -1,7 +1,7 @@
 get '/expenses' do
   if request.xhr?
     user = User.find(session[:user_id])
-    expenses = user.credited_expenses
+    expenses = user.credited_expenses + user.debited_expenses
     expenses.to_json
   else
   end
