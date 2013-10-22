@@ -39,13 +39,15 @@ end
 
 roommates = Group.create(:name => "Roommates")
 
-people = [briana, robin, bryan]
+people = [brian, briana, robin, bryan]
 
+# Form the group
 people.each do |person|
   roommates.users << person
 end
 
-people.each do |person| 
+
+[briana, robin, bryan].each do |person| 
   Expense.all.each do |expense|
     expense.debtors << person
     expense.save!

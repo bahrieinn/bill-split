@@ -73,7 +73,8 @@ var EditExpense = Backbone.View.extend({
   el: '.page',
   
   events: {
-    'submit .edit-expense-form':'saveExpense'
+    'submit .edit-expense-form':'saveExpense',
+    'click .delete':'deleteExpense'
   },
 
   render: function(){

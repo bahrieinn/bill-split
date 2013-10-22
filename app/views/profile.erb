@@ -13,7 +13,7 @@
         <th>Amount</th>
         <th>Who Paid?</th>
         <th>Who Owes?</th>
-        <th></th>
+        <th>Actions</th>
       </tr> 
     </thead>
     <tbody>
@@ -25,6 +25,7 @@
               <td>{{= expense.total }}</td>
               <td>{{= expense.creditor_name }}</td>
               <td>{{= expense.debtor_names }}</td>
+              <td><button type="submit" class="btn btn-danger delete">Delete</button></td>
           </tr>
         {{ }); }}
     </tbody>
