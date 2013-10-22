@@ -23,7 +23,7 @@
             {{ var expense = expense.get('expense') }}
               <td>{{= expense.name }}</td>
               <td>{{= expense.category }}</td>
-              <td>{{= expense.total }}</td>
+              <td>{{= '$'+ parseFloat(expense.total).toFixed(2) }}</td>
               <td>{{= expense.creditor_name }}</td>
               <td>{{= expense.debtor_names }}</td>
               <td>
@@ -49,7 +49,7 @@
       <input type="text" id="category" name="category"><br>
 
       <label for="total">Amount</label>
-      <input type="text" id="total" name="total"><br>
+      <input type="number" step="0.01" id="total" name="total"><br>
       <label for="debtors">Who Owes?</label><br>
       {{  _.each(members, function(member){ }}
         {{ var member = member.get('user') }}

@@ -5,8 +5,7 @@ names = ["ComEd", "1600 S Indiana", "Comcast", "Trader Joes", "Costco"]
 
 
 def rand_price
-  num = rand(10..200).to_s
-  return num + ".00"
+  num = rand(10.0..200.0).round(2)
 end
 
 brian = User.create(:first_name => "Brian",

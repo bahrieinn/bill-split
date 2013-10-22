@@ -3,7 +3,7 @@ class CreateExpenses < ActiveRecord::Migration
     create_table :expenses do |t|
       t.belongs_to :creditor
       t.string :category
-      t.string :total
+      t.decimal :total, :precision => 8, :scale => 2
 
       t.timestamps
     end
