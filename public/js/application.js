@@ -22,7 +22,8 @@ $(document).ready(function() {
   var Router = Backbone.Router.extend({
     routes: {
       '':'home',
-      'new':'newExpense'
+      'new':'newExpense',
+      'delete/:id':'deleteExpense'
     }  
   });
 
@@ -57,6 +58,10 @@ _.templateSettings = {
 var ExpenseList = Backbone.View.extend({
   el: '.page',
 
+  events: {
+    'click .delete':'deleteExpense'
+  },
+
   render: function(){
     var that = this;
     var expenses = new Expenses();
@@ -66,15 +71,26 @@ var ExpenseList = Backbone.View.extend({
         that.$el.html(template);
       }
     });
-  }
+  },
+
+  deleteExpense: function(event){
+    var that = this;
+    var expense_id = $(event.currentTarget).prev().val();
+    this.expense = new Expense({id: expense_id})
+    this.expense.destroy({
+      success: function(){
+        that.render();
+      }
+    });
+    return false;
+  } 
 });
 
 var EditExpense = Backbone.View.extend({
   el: '.page',
   
   events: {
-    'submit .edit-expense-form':'saveExpense',
-    'click .delete':'deleteExpense'
+    'submit .edit-expense-form':'saveExpense'
   },
 
   render: function(){
@@ -91,7 +107,6 @@ var EditExpense = Backbone.View.extend({
 
   saveExpense: function(event){
     var expenseDetails = $(event.currentTarget).serializeObject();
-    console.log(expenseDetails);
     var expense = new Expense();
     expense.save(expenseDetails, {
       success: function(expense){
@@ -99,12 +114,8 @@ var EditExpense = Backbone.View.extend({
       }
     });
     return false;
-  },
+  }
 
-  deleteExpense: function(event){
-    console.log("Delete expense clicked");
-    return false;
-  } 
 });
 
 /////////// INITIALIZE OBJECTS HERE  //////////////

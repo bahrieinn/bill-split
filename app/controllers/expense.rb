@@ -7,6 +7,13 @@ get '/expenses' do
   end
 end
 
+get '/expenses/:id' do
+  if request.xhr?
+    expense = Expense.find(params[:id])
+    expense.to_json
+  end
+end
+
 post '/expenses' do
   if request.xhr?
     content_type :json
@@ -31,5 +38,13 @@ post '/expenses' do
     else
       "Expense NOT saved!"
     end
+  end
+end
+
+delete '/expenses/:id' do
+  if request.xhr?
+    expense = Expense.find(params[:id])
+    expense.destroy
+    {}.to_json
   end
 end
