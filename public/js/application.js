@@ -60,7 +60,7 @@ _.templateSettings = {
 };
 
 var UserSummary = Backbone.View.extend({
-  el: '.page',
+  el: '.summary',
 
   render: function(){
     var that = this;
@@ -68,7 +68,7 @@ var UserSummary = Backbone.View.extend({
     stats.fetch({
       success: function(stats){
         var template = _.template($('#user-summary').html(), {stats: stats.attributes} )
-        that.$el.prepend(template);
+        that.$el.html(template);
       }
     });
   }
@@ -147,19 +147,13 @@ var EditExpense = Backbone.View.extend({
   var mainRouter = new Router();
 
   mainRouter.on('route:home', function(){
-    expenseList.render();
     userSummary.render();
+    expenseList.render();
   });
 
   mainRouter.on('route:newExpense', function(){
     newExpenseForm.render();
   });
-
-  mainRouter.on('route:delete', function(){
-    expenseList.render();
-    userSummary.render();
-  })
-
 
   Backbone.history.start();
 });
