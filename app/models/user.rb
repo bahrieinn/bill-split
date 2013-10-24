@@ -31,4 +31,12 @@ class User < ActiveRecord::Base
     first_name[0].upcase + last_name[0].upcase
   end
 
+  def total_credit
+    self.credited_expenses.pluck(:total).reduce(:+)
+  end
+
+  def total_debt
+    self.debited_expenses.pluck(:total).reduce(:+)
+  end
+
 end

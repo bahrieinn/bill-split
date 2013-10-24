@@ -4,6 +4,13 @@
 
 <div class="page"></div>
 
+<script type="text/template" id="user-summary">
+    <h3><%= @user.first_name %> owes: {{= stats.total_debt }}</h3>
+    <h3><%= @user.first_name %> is owed: {{= stats.total_credit }}</h3>
+</script>
+
+
+
 <script type="text/template" id="bills-table">
   <a href="#/new" class="btn btn-primary">Add Expense</a>
   <table class="table striped">

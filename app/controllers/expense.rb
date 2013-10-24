@@ -45,6 +45,6 @@ delete '/expenses/:id' do
   if request.xhr?
     expense = Expense.find(params[:id])
     expense.destroy
-    {}.to_json
+    expense.to_json
   end
 end

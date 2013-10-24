@@ -36,6 +36,10 @@ var Expense = Backbone.Model.extend({
   urlRoot: '/expenses'
 });
 
+var UserStats = Backbone.Model.extend({
+  urlRoot: '/users/stats'
+})
+
 /***************** BACKBONE COLLECTIONS *****************/
 
 var Expenses = Backbone.Collection.extend({
@@ -54,6 +58,21 @@ _.templateSettings = {
   interpolate: /\{\{\=(.+?)\}\}/g,
   evaluate: /\{\{(.+?)\}\}/g
 };
+
+var UserSummary = Backbone.View.extend({
+  el: '.page',
+
+  render: function(){
+    var that = this;
+    var stats = new UserStats();
+    stats.fetch({
+      success: function(stats){
+        var template = _.template($('#user-summary').html(), {stats: stats.attributes} )
+        that.$el.prepend(template);
+      }
+    });
+  }
+});
 
 var ExpenseList = Backbone.View.extend({
   el: '.page',
@@ -76,10 +95,11 @@ var ExpenseList = Backbone.View.extend({
   deleteExpense: function(event){
     var that = this;
     var expense_id = $(event.currentTarget).prev().val();
-    this.expense = new Expense({id: expense_id})
+    this.expense = new Expense({'id': expense_id});
     this.expense.destroy({
-      success: function(){
-        that.render();
+      success: function(response, options){
+        mainRouter.navigate('delete/:id');
+        mainRouter.navigate('', {trigger: true});
       }
     });
     return false;
@@ -120,6 +140,7 @@ var EditExpense = Backbone.View.extend({
 });
 
 /////////// INITIALIZE OBJECTS HERE  //////////////
+  var userSummary = new UserSummary();
   var expenseList = new ExpenseList();
   var newExpenseForm = new EditExpense();
 
@@ -127,11 +148,17 @@ var EditExpense = Backbone.View.extend({
 
   mainRouter.on('route:home', function(){
     expenseList.render();
+    userSummary.render();
   });
 
   mainRouter.on('route:newExpense', function(){
     newExpenseForm.render();
   });
+
+  mainRouter.on('route:delete', function(){
+    expenseList.render();
+    userSummary.render();
+  })
 
 
   Backbone.history.start();
