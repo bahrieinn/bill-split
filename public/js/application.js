@@ -136,7 +136,6 @@ var EditExpense = Backbone.View.extend({
     });
     return false;
   }
-
 });
 
 /////////// INITIALIZE OBJECTS HERE  //////////////
