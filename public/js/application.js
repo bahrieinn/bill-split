@@ -110,7 +110,8 @@ var EditExpense = Backbone.View.extend({
   el: '.page',
   
   events: {
-    'submit .edit-expense-form':'saveExpense'
+    'submit .edit-expense-form':'saveExpense',
+    ''
   },
 
   render: function(){
@@ -126,7 +127,6 @@ var EditExpense = Backbone.View.extend({
 
   saveExpense: function(event){
     var expenseDetails = $(event.currentTarget).serializeObject();
-    console.log(expenseDetails);
     var expense = new Expense();
     expense.save(expenseDetails, {
       success: function(expense){
