@@ -122,7 +122,6 @@ var EditExpense = Backbone.View.extend({
         that.$el.prepend(template);
       }
     });
-
   },
 
   saveExpense: function(event){
@@ -139,11 +138,10 @@ var EditExpense = Backbone.View.extend({
 });
 
 /////////// INITIALIZE OBJECTS HERE  //////////////
-  var userSummary = new UserSummary();
-  var expenseList = new ExpenseList();
+  var userSummary    = new UserSummary();
+  var expenseList    = new ExpenseList();
   var newExpenseForm = new EditExpense();
-
-  var mainRouter = new Router();
+  var mainRouter     = new Router();
 
   mainRouter.on('route:home', function(){
     userSummary.render();
