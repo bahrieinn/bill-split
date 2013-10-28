@@ -3,7 +3,7 @@ class CreateParticipations < ActiveRecord::Migration
     create_table :participations do |t|
       t.belongs_to :user
       t.belongs_to :expense
-      t.string :amount_owed
+      t.decimal :amount_owed, :precision => 8, :scale => 2
 
       t.timestamps
     end
