@@ -61,12 +61,11 @@
       <label for="debtors">Who Owes?</label><br>
       {{  _.each(members, function(member){ }}
         {{ var member = member.get('user') }}
-        // <input id="checkbox_{{= member.id }}" type="checkbox" name="debtors" value="{{= member.id }}"> {{= member.first_name.trim() }} <br>
-        
+        <label for="">{{= member.first_name.trim() }}</label>
+          <input type="number" step="0.01" name="debtor_{{= member.id}}" data-memberId="{{= member.id }}"><br>
       {{  }); }}
       <button type="submit" class="btn">Save Expense</button>
     </form>
   </div>
 </script>
-<label for="">{{= member.first_name.trim() }}</label>
-<input type="text" name="debtors">
+
