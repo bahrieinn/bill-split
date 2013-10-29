@@ -125,8 +125,6 @@ var EditExpense = Backbone.View.extend({
   },
 
   saveExpense: function(event){
-    var customData = $(event.currentTarget).data("memberid");
-    console.log(customData);
     var expenseDetails = $(event.currentTarget).serializeObject();
     console.log(expenseDetails);
     var expense = new Expense();
